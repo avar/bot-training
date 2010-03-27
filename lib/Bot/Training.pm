@@ -170,8 +170,6 @@ $use
 $options
 USAGE
 
-    # Hack: We can't get at our object from here so we have to inspect
-    # @ARGV directly.
     say "\n", $synopsis;
 
     exit 1;
@@ -183,11 +181,36 @@ __PACKAGE__->meta->make_immutable;
 
 =head1 NAME
 
-Bot::Training - Training material for bots like L<Hailo> and L<AI::MegaHAL>
+Bot::Training - Plain text training material for bots like L<Hailo> and L<AI::MegaHAL>
+
+=head1 SYNOPSIS
+
+    use Bot::Training;
+    use File::Slurp qw< slurp >;
+
+    my $bt = Bot::Training->new;
+
+    # Plugins I know about. Install Task::Bot::Training for more:
+    my @plugins = $bt->plugins
+
+    # Get the plugin object of a .trn file (which is just a plain text
+    # file). These all work just as well:
+    my $hal = $bt->file('megahal');
+    my $hal = $bt->file('MegaHAL');
+    my $hal = $bt->file('Bot::Training::MegaHAL');
+
+    # Get all lines in the file with File::Slurp:
+    my @test = split /\n/, slurp($hal->file);
 
 =head1 DESCRIPTION
 
-...
+Markov bots like L<Hailo> and L<AI::MegaHAL> are fun. But to get them
+working you either need to train them on existing training material or
+make your own.
+
+This module provides a pluggable way to install already existing
+training files via the CPAN. It also comes with a command-line
+interface called C<bot-training>.
 
 =head1 AUTHORS
 
