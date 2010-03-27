@@ -21,7 +21,7 @@ $Bot::Training::HERE_MOMMY = __DIR__; }
 @ARGV = qw(--help) unless @ARGV;
 
 # Hailing frequencies open
-Bot::Training->new_with_options->run;
+exit(Bot::Training->new_with_options->run // 0);
 
 =encoding utf8
 
@@ -31,9 +31,15 @@ bot-training - Command-line interface L<Bot::Training>
 
 =head1 SYNOPSIS
 
+    # Install all known training files from CPAN
+    sudo cpan Task::Bot::Training
+
     # Spew the megahal training file(provided by
     # Bot::Training::MegaHAL) file to STDOUT)
     bot-training -f megahal
+
+    # List the currently available training files
+    bot-training -l
 
 =head1 DESCRIPTION
 

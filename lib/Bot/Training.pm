@@ -32,14 +32,6 @@ has _go_version => (
     is            => 'ro',
 );
 
-has _go_examples => (
-    traits        => [ qw/ Getopt / ],
-    cmd_flag      => 'examples',
-    documentation => 'Print examples along with the help message',
-    isa           => Bool,
-    is            => 'ro',
-);
-
 has _go_list => (
     traits        => [ qw/ Getopt / ],
     cmd_aliases   => 'l',
@@ -109,7 +101,20 @@ sub run {
     }
 
     if ($self->_go_list) {
-        say " * $_" for $self->plugins;
+        my @plugins = $self->plugins;
+        if (@plugins) {
+            say for @plugins;
+        } else {
+            say "No plugins loaded. Install Task::Bot::Training";
+            return 1;
+        }
+    }
+    
+    if ($self->_go_file) {
+        my $trn = $self->file( $self->_go_file );;
+        open my $fh, "<", $trn->file;
+        print while <$fh>;
+        close $fh;
     }
 
 }
@@ -167,7 +172,7 @@ USAGE
 
     # Hack: We can't get at our object from here so we have to inspect
     # @ARGV directly.
-    say "\n", $synopsis if "@ARGV" ~~ /--examples/;
+    say "\n", $synopsis;
 
     exit 1;
 }
