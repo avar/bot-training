@@ -2,23 +2,18 @@ package Bot::Training::Plugin;
 
 use 5.010;
 use Any::Moose;
-use Dir::Self;
+use File::ShareDir qw< :ALL >;
 use File::Spec::Functions qw< catdir catfile >;
-use namespace::clean -except => [ qw< meta plugins > ];
+use namespace::clean -except => 'meta';
 
 sub file {
     my ($self) = @_;
 
     my $class = ref $self;
-    $class =~ s[::][/]g;
-    $class =~ s[$][.pm];
-    my $path = $INC{$class};
+    my ($last) = $class =~ m[::([^:]+)$];
+    my $file = module_file( $class, lc($last) . '.trn');
 
-    my $resource = $path;
-    $resource =~ s[\.pm$][.trn];
-    $resource =~ s[/\K([^/]+)$][lc $1]e;
-
-    return $resource;
+    return $file;
 }
 
 __PACKAGE__->meta->make_immutable;
