@@ -212,7 +212,7 @@ This module provides a pluggable way to install already existing
 training files via the CPAN. It also comes with a command-line
 interface called C<bot-training>.
 
-=head1 AUTHORS
+=head1 AUTHOR
 
 E<AElig>var ArnfjE<ouml>rE<eth> Bjarmason <avar@cpan.org>
 
