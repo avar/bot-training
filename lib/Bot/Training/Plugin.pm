@@ -11,7 +11,9 @@ sub file {
 
     my $class = ref $self;
     my ($last) = $class =~ m[::([^:]+)$];
-    my $file = module_file( $class, lc($last) . '.trn');
+    $class =~ s[::][-]g;
+
+    my $file = dist_file( $class, lc($last) . '.trn');
 
     return $file;
 }
