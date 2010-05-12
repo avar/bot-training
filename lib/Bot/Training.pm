@@ -3,7 +3,6 @@ package Bot::Training;
 use 5.010;
 use autodie qw(open close);
 use Any::Moose;
-use Any::Moose 'X::Types::'.any_moose() => [qw/Bool Int Str/];
 use Module::Pluggable (
     search_path => [ 'Bot::Training' ],
     except      => [ 'Bot::Training::Plugin' ],
@@ -17,7 +16,7 @@ has help => (
     traits        => [ qw/ Getopt / ],
     cmd_aliases   => 'h',
     cmd_flag      => 'help',
-    isa           => Bool,
+    isa           => 'Bool',
     is            => 'ro',
     default       => 0,
     documentation => 'This help message',
@@ -28,7 +27,7 @@ has _go_version => (
     cmd_aliases   => 'v',
     cmd_flag      => 'version',
     documentation => 'Print version and exit',
-    isa           => Bool,
+    isa           => 'Bool',
     is            => 'ro',
 );
 
@@ -37,7 +36,7 @@ has _go_list => (
     cmd_aliases   => 'l',
     cmd_flag      => 'list',
     documentation => 'List the known Bot::Training files. Install Task::Bot::Training to get them all',
-    isa           => Bool,
+    isa           => 'Bool',
     is            => 'ro',
 );
 
@@ -46,7 +45,7 @@ has _go_file => (
     cmd_aliases   => 'f',
     cmd_flag      => 'file',
     documentation => 'The file to retrieve. Matched case-insensitively against Bot::Training plugins',
-    isa           => Str,
+    isa           => 'Str',
     is            => 'ro',
 );
 
