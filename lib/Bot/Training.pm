@@ -69,8 +69,8 @@ sub _new_class {
     }
 
     if (Any::Moose::moose_is_preferred()) {
-        require Class::MOP;
-        eval { Class::MOP::load_class($pkg) };
+        require Class::Load;
+        eval { Class::Load::load_class($pkg) };
     } else {
         eval qq[require $pkg];
     }
@@ -108,7 +108,7 @@ sub run {
             return 1;
         }
     }
-    
+
     if ($self->_go_file) {
         my $trn = $self->file( $self->_go_file );;
         open my $fh, "<", $trn->file;
