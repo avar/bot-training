@@ -1,7 +1,7 @@
 package Bot::Training::Plugin;
 
 use 5.010;
-use Any::Moose;
+use Moose;
 use File::ShareDir qw< :ALL >;
 use File::Spec::Functions qw< catdir catfile >;
 use namespace::clean -except => 'meta';

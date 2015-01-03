@@ -1,7 +1,7 @@
 package Bot::Training::Test;
 
 use 5.010;
-use Any::Moose;
+use Moose;
 
 extends 'Bot::Training::Plugin';
 

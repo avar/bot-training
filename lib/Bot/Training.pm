@@ -2,7 +2,8 @@ package Bot::Training;
 
 use 5.010;
 use autodie qw(open close);
-use Any::Moose;
+use Class::MOP;
+use Moose;
 use Module::Pluggable (
     search_path => [ 'Bot::Training' ],
     except      => [ 'Bot::Training::Plugin' ],
@@ -10,7 +11,7 @@ use Module::Pluggable (
 use List::Util qw< first >;
 use namespace::clean -except => [ qw< meta plugins > ];
 
-with any_moose('X::Getopt::Dashes');
+with 'MooseX::Getopt::Dashes';
 
 has help => (
     traits        => [ qw/ Getopt / ],
@@ -68,13 +69,7 @@ sub _new_class {
         }
     }
 
-    if (Any::Moose::moose_is_preferred()) {
-        require Class::MOP;
-        eval { Class::MOP::load_class($pkg) };
-    } else {
-        eval qq[require $pkg];
-    }
-    die $@ if $@;
+    Class::MOP::load_class($pkg);
 
     return $pkg->new;
 }
