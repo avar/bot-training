@@ -2,7 +2,7 @@ package Bot::Training;
 
 use 5.010;
 use autodie qw(open close);
-use Class::MOP;
+use Class::Load;
 use Moose;
 use Module::Pluggable (
     search_path => [ 'Bot::Training' ],
@@ -69,7 +69,7 @@ sub _new_class {
         }
     }
 
-    Class::MOP::load_class($pkg);
+    Class::Load::load_class($pkg);
 
     return $pkg->new;
 }
