@@ -2,6 +2,8 @@ Revision history for Bot::Training
 
 {{$NEXT}}
 
+0.06 2015-01-08 15:15:12
+
     - Fixed "Can't modify split in chomp" error (See http://www.cpantesters.org/cpan/report/6e341b28-9675-11e4-a3f3-4fad3a6893cb).
     - Added Dist::Zilla::Plugin::MinimumPerl to fix errors in Perl versions < 5.10
     - Renamed MooseX::Getopt _getopt_full_usage to print_usage_text, see https://rt.cpan.org/Ticket/Display.html?id=82278
