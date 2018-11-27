@@ -2,6 +2,8 @@ Revision history for Bot::Training
 
 {{$NEXT}}
 
+0.07 2018-11-27 13:18:02
+
    - Fully removed Any::Moose, first started in 0.05. The command-line
      utility still used it.
 
